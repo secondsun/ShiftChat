@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainTheme">
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".view.ChatListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ChatListActivity"></activity>
+        <activity android:name=".view.ProfileActivity" />
+        <activity android:name=".view.WelcomeActivity"></activity>
     </application>
 
 </manifest>

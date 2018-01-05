@@ -1,8 +1,10 @@
-package net.sagaoftherealms.demo.shiftchat;
+package net.sagaoftherealms.demo.shiftchat.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import net.sagaoftherealms.demo.shiftchat.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
