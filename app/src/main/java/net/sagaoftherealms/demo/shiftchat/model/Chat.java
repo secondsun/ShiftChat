@@ -10,8 +10,8 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Chat {
     @PrimaryKey(autoGenerate = true)
-    Long id;
+    public Long id;
 
     @ColumnInfo(name = "chat_name")
-    String chatName;
+    public String chatName;
 }

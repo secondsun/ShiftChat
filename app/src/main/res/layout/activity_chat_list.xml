@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.sagaoftherealms.demo.shiftchat.ChatListActivity">
+    tools:context="net.sagaoftherealms.demo.shiftchat.view.ChatListActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,6 +37,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@android:color/holo_blue_bright"
         tools:listitem="@layout/chat_list_item"
         tools:itemCount="10"
         app:layout_constraintBottom_toBottomOf="parent"
