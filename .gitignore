@@ -7,3 +7,4 @@
 /build
 /app/google-services.json
 /.nb-gradle/
+captures/*
