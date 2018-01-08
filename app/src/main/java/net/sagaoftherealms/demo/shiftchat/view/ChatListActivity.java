@@ -11,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import net.sagaoftherealms.demo.shiftchat.R;
+import net.sagaoftherealms.demo.shiftchat.ShiftChatApplication;
 import net.sagaoftherealms.demo.shiftchat.model.Chat;
 import net.sagaoftherealms.demo.shiftchat.model.ChatDatabase;
 import net.sagaoftherealms.demo.shiftchat.model.util.DBBootstrap;
+import net.sagaoftherealms.demo.shiftchat.presenter.ChatListPresenter;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class ChatListActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private ChatDatabase chatDb;
-
+    private ChatListPresenter presenter = new ChatListPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +38,23 @@ public class ChatListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        chatDb = Room.inMemoryDatabaseBuilder(getApplicationContext(), ChatDatabase.class).addCallback(
-                new RoomDatabase.Callback() {
-                    @Override
-                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                        super.onCreate(db);
-
-                        //create chat objects
-                        DBBootstrap.createChats(db);
-                        DBBootstrap.createMembers(db);
-                        DBBootstrap.populateChats(db);
-                    }
-                }
-        ).allowMainThreadQueries().fallbackToDestructiveMigration().build();
-
-        List<Chat> chats = chatDb.chatDao().findMostRecentChats();
-        recyclerView.setAdapter(new ChatListAdapter(chats));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.attachChatActivity(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.detachChatActivity();
+    }
+
+    public void displayChats(List<Chat> chats) {
+        recyclerView.setAdapter(new ChatListAdapter(chats, (ShiftChatApplication) getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    }
 }

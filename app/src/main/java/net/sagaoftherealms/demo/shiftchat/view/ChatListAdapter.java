@@ -1,5 +1,6 @@
 package net.sagaoftherealms.demo.shiftchat.view;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import net.sagaoftherealms.demo.shiftchat.R;
+import net.sagaoftherealms.demo.shiftchat.ShiftChatApplication;
 import net.sagaoftherealms.demo.shiftchat.model.Chat;
 
 import java.util.List;
@@ -17,9 +21,11 @@ import butterknife.ButterKnife;
 
 class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
     private final List<Chat> chats;
+    private final ShiftChatApplication appContext;
 
-    public ChatListAdapter(List<Chat> chats) {
+    public ChatListAdapter(List<Chat> chats, ShiftChatApplication appContext) {
         this.chats = chats;
+        this.appContext = appContext;
     }
 
     @Override
@@ -35,6 +41,14 @@ class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
     public void onBindViewHolder(ChatListAdapter.ViewHolder holder, int position) {
         Chat chat = chats.get(position);
         holder.chatNameLabel.setText(chat.chatName);
+        holder.lastMessageDate.setText(chat.getLastMessageTime());
+        holder.chatPreview.setText(chat.getLastMessageText());
+        Uri thumbnail = chat.getThumbnailUri();
+        if (thumbnail != null ) {
+            appContext.getPicasso().load(thumbnail).fit().into(holder.chatIcon);
+        } else {
+            holder.chatIcon.setImageResource(R.drawable.ic_person);
+        }
     }
 
     @Override
