@@ -8,33 +8,34 @@ import android.support.annotation.NonNull;
 import net.sagaoftherealms.demo.shiftchat.ShiftChatApplication;
 import net.sagaoftherealms.demo.shiftchat.model.Chat;
 import net.sagaoftherealms.demo.shiftchat.model.ChatDatabase;
+import net.sagaoftherealms.demo.shiftchat.model.ChatMessage;
 import net.sagaoftherealms.demo.shiftchat.model.util.DBBootstrap;
 import net.sagaoftherealms.demo.shiftchat.view.ChatListActivity;
+import net.sagaoftherealms.demo.shiftchat.view.ChatMessageActivity;
 
 import java.util.List;
 
-public class ChatListPresenter {
+public class ChatMessagesPresenter {
 
-    private ChatListActivity activity;
+    private ChatMessageActivity activity;
     private ChatDatabase chatDb;
 
-    public void attachChatActivity(ChatListActivity activity) {
+    public void attachChatActivity(ChatMessageActivity activity, Long chatId) {
         this.activity = activity;
-        beginLoadChats();
+        beginLoadChatMessages(chatId);
     }
 
-    private void beginLoadChats() {
+    private void beginLoadChatMessages(Long chatId) {
 
         if (activity != null) {
 
             chatDb= ((ShiftChatApplication)activity.getApplication()).getDB();
 
-            List<Chat> chats = chatDb.chatDao().findMostRecentChats();
-            for (Chat chat : chats) {
-                chat.members.addAll(chatDb.chatDao().findMembersInChat(chat.id));
-                chat.messages.addAll(chatDb.chatDao().findMessagesInChat(chat.id));
+            List<ChatMessage> chats = chatDb.chatDao().findMessagesInChat(chatId);
+            for (ChatMessage chatMessage : chats) {
+                chatMessage.member = chatDb.chatDao().findChatMember(chatMessage.senderGoogleId);
             }
-            activity.displayChats(chats);
+            activity.displayChatMessages(chats);
         }
     }
 

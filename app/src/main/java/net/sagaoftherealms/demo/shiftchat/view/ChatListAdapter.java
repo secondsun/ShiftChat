@@ -49,6 +49,7 @@ class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
         } else {
             holder.chatIcon.setImageResource(R.drawable.ic_person);
         }
+        holder.itemView.setOnClickListener((view) ->{appContext.startChatMessagesActivity(chat.id);});
     }
 
     @Override

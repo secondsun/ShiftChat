@@ -9,21 +9,21 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "chat_member")
 public class ChatMember {
     @ColumnInfo(name = "display_name")
-    String displayName;
+    public String displayName;
     @ColumnInfo(name = "about_me")
-    String aboutMe;
+    public String aboutMe;
     @ColumnInfo(name = "country")
-    String country;
+    public String country;
     @ColumnInfo(name = "city")
-    String city;
+    public String city;
     @ColumnInfo(name = "email_address")
-    String emailAddress;
+    public String emailAddress;
     @ColumnInfo(name = "picture_uri")
-    String pictureUri;
+    public String pictureUri;
 
     @PrimaryKey
     @ColumnInfo(name = "google_id")
     @NonNull
-    String googleId;
+    public String googleId;
 
 }

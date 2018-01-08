@@ -26,4 +26,7 @@ public interface ChatDao {
 
     @Insert
     long insertChatMember(ChatMember chatMember);
+
+    @Query("Select distinct chat_member.* from chat_member where google_id = :senderGoogleId")
+    ChatMember findChatMember(String senderGoogleId);
 }

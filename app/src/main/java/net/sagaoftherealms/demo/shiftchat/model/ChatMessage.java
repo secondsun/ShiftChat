@@ -3,6 +3,7 @@ package net.sagaoftherealms.demo.shiftchat.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -16,17 +17,20 @@ import android.arch.persistence.room.PrimaryKey;
         tableName = "chat_message")
 public class ChatMessage {
     @PrimaryKey(autoGenerate = true)
-    Long id;
+    public Long id;
 
     @ColumnInfo(name = "parent_chat_id")
-    Long parentChatId;
+    public Long parentChatId;
 
-    String message;
+    public String message;
 
     @ColumnInfo(name = "message_date")
-    Long messageDate;
+    public Long messageDate;
 
     @ColumnInfo(name = "sender_google_id")
-    String senderGoogleId;
+    public String senderGoogleId;
+
+    @Ignore
+    public ChatMember member;
 
 }
