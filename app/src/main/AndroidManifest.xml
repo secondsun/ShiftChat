@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/MainTheme">
         <activity
-            android:name=".view.ChatListActivity"
+            android:name=".view.WelcomeActivity"
             android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.ProfileActivity" />
-        <activity android:name=".view.WelcomeActivity" />
+        <activity android:name=".view.ChatListActivity" />
         <activity android:name=".view.ChatMessageActivity"></activity>
     </application>
 
