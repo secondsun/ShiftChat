@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 
 import net.sagaoftherealms.demo.shiftchat.R;
 
+import org.aerogear.mobile.core.MobileCore;
+
 import java.io.IOException;
 
 import okhttp3.FormBody;
@@ -29,6 +31,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 0x123;
     private GoogleSignInClient mGoogleSignInClient;
+
+    private MobileCore core;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
